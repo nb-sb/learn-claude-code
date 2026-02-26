@@ -57,8 +57,8 @@ class SkillLoader:
     def _load_all(self):
         if not self.skills_dir.exists():
             return
-        for f in sorted(self.skills_dir.glob("*.md")):
-            name = f.stem
+        for f in sorted(self.skills_dir.rglob("SKILL.md")):
+            name = f.parent.name
             text = f.read_text()
             meta, body = self._parse_frontmatter(text)
             self.skills[name] = {"meta": meta, "body": body, "path": str(f)}
